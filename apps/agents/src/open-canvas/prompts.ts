@@ -224,8 +224,8 @@ export const ROUTE_QUERY_OPTIONS_HAS_ARTIFACTS = `
 - 'replyToGeneralInput': The user submitted a general input which does not require making an update, edit or generating a new artifact. This should ONLY be used if you are ABSOLUTELY sure the user does NOT want to make an edit, update or generate a new artifact.`;
 
 export const ROUTE_QUERY_OPTIONS_NO_ARTIFACTS = `
-- 'generateArtifact': The user has inputted a request which requires generating an artifact.
-- 'replyToGeneralInput': The user submitted a general input which does not require making an update, edit or generating a new artifact. This should ONLY be used if you are ABSOLUTELY sure the user does NOT want to make an edit, update or generate a new artifact.`;
+- 'generateArtifact': The user has explicitly requested to create, write, code, build, or generate specific content (like documents, code, emails, articles, etc.). Only use this when the user clearly wants to CREATE something substantial.
+- 'replyToGeneralInput': The user submitted a general input, greeting, question, or conversational message that does not require creating new content. Use this for greetings (hello, hi, hola), questions, casual conversation, or when the user is just chatting. This should be the DEFAULT choice unless the user explicitly asks to create or generate something.`;
 
 export const CURRENT_ARTIFACT_PROMPT = `This artifact is the one the user is currently viewing.
 <artifact>
