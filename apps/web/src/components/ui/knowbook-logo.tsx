@@ -44,6 +44,7 @@ export function KnowbookLogo({
         height={size}
         alt="Knowbook Logo"
         className="rounded-lg"
+        style={{ width: 'auto', height: 'auto' }}
       />
       {showText && (
         <span 
