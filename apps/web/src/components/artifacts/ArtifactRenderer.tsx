@@ -15,7 +15,7 @@ import { TextRenderer } from "./TextRenderer";
 import { CustomQuickActions } from "./actions_toolbar/custom";
 import { getArtifactContent } from "@opencanvas/shared/utils/artifacts";
 import { ArtifactLoading } from "./ArtifactLoading";
-import { AskOpenCanvas } from "./components/AskOpenCanvas";
+import { AskKnowbook } from "./components/AskOpenCanvas";
 import { useGraphContext } from "@/contexts/GraphContext";
 import { ArtifactHeader } from "./header";
 import { useUserContext } from "@/contexts/UserContext";
@@ -358,7 +358,7 @@ function ArtifactRendererComponent(props: ArtifactRendererProps) {
           />
         </div>
         {selectionBox && isSelectionActive && isValidSelectionOrigin && (
-          <AskOpenCanvas
+          <AskKnowbook
             ref={selectionBoxRef}
             inputValue={inputValue}
             setInputValue={setInputValue}
