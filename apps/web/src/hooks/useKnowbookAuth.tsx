@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { useUser } from '@/contexts/UserContext';
+import { useUserContext } from '@/contexts/UserContext';
 import { 
   clientUserMetadata, 
   type KnowbookUserMetadata,
@@ -27,7 +27,7 @@ interface KnowbookAuthActions {
 }
 
 export function useKnowbookAuth(): KnowbookAuthState & KnowbookAuthActions {
-  const { user } = useUser();
+  const { user } = useUserContext();
   const [state, setState] = useState<KnowbookAuthState>({
     apiKey: null,
     isLoading: true,
