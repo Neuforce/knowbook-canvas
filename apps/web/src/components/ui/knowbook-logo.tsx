@@ -1,5 +1,6 @@
 import NextImage from "next/image";
 import { cn } from "@/lib/utils";
+import { components, getFont } from "@/lib/design-tokens";
 
 interface KnowbookLogoProps {
   /**
@@ -34,12 +35,12 @@ export function KnowbookLogo({
   className,
   textClassName,
 }: KnowbookLogoProps) {
-  const iconSrc = variant === "dark" ? "/knowbook-icon-white.png" : "/knowbook-icon.png";
+  const logoConfig = components.knowbookLogo.variants[variant];
   
   return (
     <div className={cn("flex items-center gap-3", className)}>
       <NextImage
-        src={iconSrc}
+        src={logoConfig.icon}
         width={size}
         height={size}
         alt="Knowbook Logo"
@@ -52,7 +53,7 @@ export function KnowbookLogo({
             variant === "dark" ? "text-white" : "text-gray-900",
             textClassName
           )}
-          style={{ fontFamily: 'Urbanist, sans-serif' }}
+          style={{ fontFamily: getFont('brand') }}
         >
           knowbook
         </span>
@@ -61,23 +62,15 @@ export function KnowbookLogo({
   );
 }
 
-// CSS-in-JS approach for dynamic theming
-export const knowbookLogoStyles = {
-  light: {
-    icon: "/knowbook-icon.png",
-    textColor: "text-gray-900",
-  },
-  dark: {
-    icon: "/knowbook-icon-white.png", 
-    textColor: "text-white",
-  },
-} as const;
-
-// Utility function for programmatic access
+// Utility functions for programmatic access (using design tokens)
 export function getKnowbookIcon(isDark: boolean = false): string {
-  return isDark ? "/knowbook-icon-white.png" : "/knowbook-icon.png";
+  const variant = isDark ? "dark" : "light";
+  return components.knowbookLogo.variants[variant].icon;
 }
 
 export function getKnowbookTextColor(isDark: boolean = false): string {
   return isDark ? "text-white" : "text-gray-900";
 }
+
+// Re-export design tokens for external use
+export { components as knowbookLogoTokens } from "@/lib/design-tokens";

@@ -1,0 +1,510 @@
+# 🚀 Knowbook Canvas - Frontend Engineering Excellence
+# Enforces React/Next.js best practices, design system consistency, and maintainable code
+
+## 🎯 CORE FRONTEND PRINCIPLES
+
+### Design Philosophy
+- **Component-First**: Reusable, composable UI components
+- **Design System Consistency**: Use design tokens and standardized patterns
+- **Accessibility First**: WCAG 2.1 AA compliance by default
+- **Performance Optimized**: Core Web Vitals excellence
+- **Type Safety**: Full TypeScript coverage with strict mode
+
+### Code Quality Standards
+- **100% Component Testing**: Every component must have tests
+- **Type Safety**: Strict TypeScript with proper prop interfaces
+- **Error Boundaries**: Graceful error handling and user feedback
+- **Performance**: <100ms interactions, optimized bundle sizes
+- **Accessibility**: Screen reader support, keyboard navigation
+
+## 🏗️ COMPONENT ARCHITECTURE
+
+### Component Structure
+```tsx
+// ✅ GOOD: Proper component structure
+interface ComponentProps {
+  /** Clear prop documentation */
+  variant?: "primary" | "secondary";
+  size?: "sm" | "md" | "lg";
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function Component({ 
+  variant = "primary", 
+  size = "md", 
+  children,
+  className 
+}: ComponentProps) {
+  return (
+    <div className={cn("base-styles", variantStyles[variant], className)}>
+      {children}
+    </div>
+  );
+}
+
+// ❌ BAD: Inline styles, no props interface, hardcoded values
+export function BadComponent({ children }) {
+  return (
+    <div style={{ color: "red", fontSize: "16px" }}>
+      {children}
+    </div>
+  );
+}
+```
+
+### Asset Management
+- **NO hardcoded image paths** - Use design system components
+- **NO inline styles** - Use Tailwind classes or CSS modules
+- **NO magic numbers** - Use design tokens and constants
+- **Responsive images** - Always use Next.js Image component
+
+```tsx
+// ✅ GOOD: Reusable logo component with variants
+<KnowbookLogo variant="dark" size={36} />
+
+// ❌ BAD: Hardcoded image paths
+<img src="/knowbook-icon.png" width="36" height="36" />
+```
+
+## 📁 FILE ORGANIZATION
+
+### Directory Structure
+```
+src/
+├── components/
+│   ├── ui/              # Design system components
+│   ├── features/        # Feature-specific components
+│   └── layout/          # Layout components
+├── lib/
+│   ├── utils.ts         # Utility functions
+│   ├── constants.ts     # App constants
+│   └── types.ts         # Shared types
+├── hooks/               # Custom React hooks
+├── stores/              # State management
+└── styles/              # Global styles and themes
+```
+
+### Naming Conventions
+- **PascalCase** for components: `KnowbookLogo`, `UserProfile`
+- **camelCase** for functions/variables: `getUserData`, `isLoading`
+- **kebab-case** for files: `knowbook-logo.tsx`, `user-profile.tsx`
+- **SCREAMING_SNAKE_CASE** for constants: `API_BASE_URL`, `MAX_FILE_SIZE`
+
+## 🎨 DESIGN SYSTEM ENFORCEMENT
+
+### Theme Management
+```tsx
+// ✅ GOOD: Use design tokens
+const theme = {
+  colors: {
+    primary: {
+      50: '#f0f9ff',
+      500: '#3b82f6',
+      900: '#1e3a8a',
+    }
+  },
+  fonts: {
+    brand: ['Urbanist', 'sans-serif'],
+    body: ['Inter', 'sans-serif'],
+  }
+} as const;
+
+// ❌ BAD: Hardcoded values
+style={{ color: '#3b82f6', fontFamily: 'Urbanist, sans-serif' }}
+```
+
+### Component Variants
+```tsx
+// ✅ GOOD: Systematic variant system
+const buttonVariants = cva(
+  "inline-flex items-center justify-center rounded-md font-medium",
+  {
+    variants: {
+      variant: {
+        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+      },
+      size: {
+        sm: "h-8 px-3 text-xs",
+        md: "h-9 px-4 text-sm",
+        lg: "h-10 px-8 text-base",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+      size: "md",
+    },
+  }
+);
+
+// ❌ BAD: Inconsistent styling
+<button className="bg-blue-500 text-white p-2 rounded">Click me</button>
+```
+
+## 🧩 COMPONENT BEST PRACTICES
+
+### Prop Interface Design
+```tsx
+// ✅ GOOD: Comprehensive prop interface
+interface KnowbookLogoProps {
+  /** Theme variant for automatic styling */
+  variant?: "light" | "dark";
+  /** Icon size in pixels */
+  size?: number;
+  /** Show text alongside icon */
+  showText?: boolean;
+  /** Additional container classes */
+  className?: string;
+  /** Additional text classes */
+  textClassName?: string;
+  /** Click handler */
+  onClick?: () => void;
+  /** Accessibility label */
+  "aria-label"?: string;
+}
+
+// ❌ BAD: Unclear props, missing types
+interface BadProps {
+  type?: string;
+  big?: boolean;
+  style?: any;
+}
+```
+
+### Accessibility Requirements
+```tsx
+// ✅ GOOD: Accessible component
+<button
+  aria-label="Close dialog"
+  aria-expanded={isOpen}
+  onClick={handleClose}
+  className={cn("focus:ring-2 focus:ring-primary", className)}
+>
+  <X className="h-4 w-4" />
+  <span className="sr-only">Close</span>
+</button>
+
+// ❌ BAD: No accessibility considerations
+<div onClick={handleClose}>
+  <X />
+</div>
+```
+
+### Performance Optimization
+```tsx
+// ✅ GOOD: Optimized component
+const ExpensiveComponent = memo(({ data, onUpdate }: Props) => {
+  const memoizedValue = useMemo(() => 
+    expensiveCalculation(data), [data]
+  );
+  
+  const handleUpdate = useCallback((id: string) => {
+    onUpdate(id);
+  }, [onUpdate]);
+
+  return <div>{/* component JSX */}</div>;
+});
+
+// ❌ BAD: No optimization
+const BadComponent = ({ data, onUpdate }) => {
+  const value = expensiveCalculation(data); // Runs every render
+  return <div onClick={() => onUpdate(Math.random())}>{value}</div>;
+};
+```
+
+## 🔄 STATE MANAGEMENT
+
+### Local State
+```tsx
+// ✅ GOOD: Proper state management
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState<string | null>(null);
+
+const handleSubmit = useCallback(async (data: FormData) => {
+  setIsLoading(true);
+  setError(null);
+  
+  try {
+    await submitData(data);
+  } catch (err) {
+    setError(err instanceof Error ? err.message : 'Unknown error');
+  } finally {
+    setIsLoading(false);
+  }
+}, []);
+
+// ❌ BAD: Poor state management
+const [loading, setLoading] = useState(false);
+const handleSubmit = (data) => {
+  setLoading(true);
+  submitData(data).then(() => setLoading(false));
+};
+```
+
+### Global State
+```tsx
+// ✅ GOOD: Typed global state
+interface AppState {
+  user: User | null;
+  theme: 'light' | 'dark';
+  isAuthenticated: boolean;
+}
+
+const useAppStore = create<AppState>((set) => ({
+  user: null,
+  theme: 'light',
+  isAuthenticated: false,
+  setUser: (user: User | null) => set({ user, isAuthenticated: !!user }),
+  toggleTheme: () => set((state) => ({ 
+    theme: state.theme === 'light' ? 'dark' : 'light' 
+  })),
+}));
+
+// ❌ BAD: Untyped, unclear state
+const useStore = create((set) => ({
+  data: {},
+  update: (newData) => set({ data: newData }),
+}));
+```
+
+## 🧪 TESTING REQUIREMENTS
+
+### Component Testing
+```tsx
+// ✅ GOOD: Comprehensive component tests
+describe('KnowbookLogo', () => {
+  it('renders with default props', () => {
+    render(<KnowbookLogo />);
+    expect(screen.getByAltText('Knowbook Logo')).toBeInTheDocument();
+    expect(screen.getByText('knowbook')).toBeInTheDocument();
+  });
+
+  it('applies dark variant correctly', () => {
+    render(<KnowbookLogo variant="dark" />);
+    const logo = screen.getByAltText('Knowbook Logo');
+    expect(logo).toHaveAttribute('src', '/knowbook-icon-white.png');
+  });
+
+  it('handles click events', async () => {
+    const handleClick = vi.fn();
+    render(<KnowbookLogo onClick={handleClick} />);
+    
+    await user.click(screen.getByRole('button'));
+    expect(handleClick).toHaveBeenCalledOnce();
+  });
+
+  it('meets accessibility standards', async () => {
+    const { container } = render(<KnowbookLogo />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+});
+
+// ❌ BAD: Minimal testing
+test('logo works', () => {
+  render(<KnowbookLogo />);
+  expect(screen.getByText('knowbook')).toBeInTheDocument();
+});
+```
+
+## 🚀 PERFORMANCE STANDARDS
+
+### Bundle Optimization
+- **Code splitting**: Dynamic imports for large components
+- **Tree shaking**: Import only what you need
+- **Image optimization**: Next.js Image with proper sizing
+- **Font optimization**: Preload critical fonts
+
+### Runtime Performance
+- **Memoization**: Use React.memo, useMemo, useCallback appropriately
+- **Virtualization**: For large lists (react-window/react-virtuoso)
+- **Lazy loading**: Defer non-critical components
+- **Debouncing**: For search inputs and API calls
+
+## 🛡️ SECURITY & ACCESSIBILITY
+
+### Security Practices
+```tsx
+// ✅ GOOD: Safe HTML rendering
+import DOMPurify from 'dompurify';
+
+const SafeHTML = ({ content }: { content: string }) => (
+  <div dangerouslySetInnerHTML={{ 
+    __html: DOMPurify.sanitize(content) 
+  }} />
+);
+
+// ❌ BAD: Unsafe HTML
+const UnsafeHTML = ({ content }) => (
+  <div dangerouslySetInnerHTML={{ __html: content }} />
+);
+```
+
+### Accessibility Checklist
+- [ ] Semantic HTML elements
+- [ ] ARIA labels and roles
+- [ ] Keyboard navigation support
+- [ ] Focus management
+- [ ] Color contrast compliance
+- [ ] Screen reader compatibility
+
+## 📱 RESPONSIVE DESIGN
+
+### Breakpoint System
+```tsx
+// ✅ GOOD: Consistent breakpoints
+const breakpoints = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+} as const;
+
+// Use Tailwind responsive classes
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  {items.map(item => <Card key={item.id} {...item} />)}
+</div>
+
+// ❌ BAD: Hardcoded media queries
+<div style={{ 
+  display: 'grid',
+  gridTemplateColumns: window.innerWidth > 768 ? 'repeat(2, 1fr)' : '1fr'
+}}>
+```
+
+## 🔧 DEVELOPMENT WORKFLOW
+
+### Component Development
+1. **Design tokens first**: Define colors, spacing, typography
+2. **Component interface**: Define props and behavior
+3. **Implementation**: Build with accessibility in mind
+4. **Testing**: Unit tests, accessibility tests, visual tests
+5. **Documentation**: Storybook stories and prop documentation
+6. **Integration**: Ensure design system consistency
+
+### Code Review Checklist
+- [ ] No hardcoded values (colors, sizes, strings)
+- [ ] Proper TypeScript interfaces
+- [ ] Accessibility attributes present
+- [ ] Performance optimizations applied
+- [ ] Tests cover all scenarios
+- [ ] Responsive design implemented
+- [ ] Error boundaries in place
+
+## 🎨 DESIGN SYSTEM COMPONENTS
+
+### Required Components
+- **KnowbookLogo**: Brand logo with theme variants ✅
+- **Button**: All variants and states
+- **Input**: Form inputs with validation
+- **Card**: Content containers
+- **Modal**: Overlay dialogs
+- **Toast**: Notifications
+- **Loading**: Loading states
+- **Error**: Error boundaries and states
+
+### Component API Standards
+```tsx
+// ✅ GOOD: Consistent component API
+interface ComponentProps {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  loading?: boolean;
+  children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
+  'aria-label'?: string;
+}
+
+// Export both component and props interface
+export { Component, type ComponentProps };
+```
+
+## 📊 MONITORING & ANALYTICS
+
+### Performance Monitoring
+- **Core Web Vitals**: LCP, FID, CLS tracking
+- **Bundle analysis**: Regular bundle size monitoring
+- **Runtime performance**: React DevTools Profiler
+- **User experience**: Error tracking and user feedback
+
+### Code Quality Metrics
+- **TypeScript coverage**: 100% strict mode
+- **Test coverage**: >90% component coverage
+- **Accessibility score**: 100% axe-core compliance
+- **Performance budget**: <100kb initial bundle
+
+## 🚀 VIBECODING OPTIMIZATIONS
+
+### Cursor AI Behavior
+- **Component-first thinking**: Always suggest reusable components
+- **Design system consistency**: Enforce design token usage
+- **Accessibility by default**: Include ARIA attributes automatically
+- **Performance conscious**: Suggest optimizations proactively
+- **Type safety**: Generate proper TypeScript interfaces
+
+### Code Generation Preferences
+- **Complete implementations**: No TODOs or stubs
+- **Test inclusion**: Generate tests with components
+- **Documentation**: Include prop documentation
+- **Error handling**: Proper error boundaries
+- **Responsive design**: Mobile-first approach
+
+Remember: **Consistency over cleverness**. Follow established patterns and prioritize maintainability over individual preferences.
+
+## 🔍 ANTI-PATTERNS TO AVOID
+
+### ❌ NEVER DO THESE:
+```tsx
+// Hardcoded styles
+style={{ color: 'red', fontSize: '16px' }}
+
+// Hardcoded image paths
+<img src="/logo.png" />
+
+// Inline event handlers with complex logic
+onClick={() => { /* 20 lines of code */ }}
+
+// Any type usage
+const data: any = fetchData();
+
+// Missing error boundaries
+<ComponentThatMightFail />
+
+// Non-semantic HTML
+<div onClick={handleClick}>Button</div>
+
+// Missing accessibility
+<button><X /></button>
+
+// Uncontrolled state mutations
+state.items.push(newItem);
+```
+
+### ✅ ALWAYS DO THESE:
+```tsx
+// Use design system components
+<KnowbookLogo variant="dark" size={36} />
+
+// Proper TypeScript interfaces
+interface Props { variant: 'light' | 'dark'; }
+
+// Semantic HTML with accessibility
+<button aria-label="Close dialog" onClick={handleClose}>
+  <X className="h-4 w-4" />
+  <span className="sr-only">Close</span>
+</button>
+
+// Error boundaries
+<ErrorBoundary fallback={<ErrorFallback />}>
+  <ComponentThatMightFail />
+</ErrorBoundary>
+
+// Immutable state updates
+setState(prev => [...prev, newItem]);
+```
+
+This `.cursorrules` file will help enforce our frontend best practices and ensure consistent, maintainable code across the entire application.
