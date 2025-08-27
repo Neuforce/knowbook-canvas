@@ -27,7 +27,9 @@ export function UserAuthForm({
   const [isGithubLoading, setGithubIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [showPasswordField, setShowPasswordField] = useState(false);
+  const [showNameField, setShowNameField] = useState(false);
 
   const isLoading =
     isEmailPasswordLoading || isGoogleLoading || isGithubLoading;
@@ -36,7 +38,7 @@ export function UserAuthForm({
     event.preventDefault();
     setEmailPasswordIsLoading(true);
 
-    await onSignupWithEmail({ email, password });
+    await onSignupWithEmail({ email, password, fullName: fullName.trim() || undefined });
     setEmailPasswordIsLoading(false);
   }
 
@@ -60,6 +62,33 @@ export function UserAuthForm({
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
+                  if (!showNameField) {
+                    setShowNameField(true);
+                  }
+                }}
+              />
+            </div>
+
+            <div
+              className={cn(
+                "overflow-hidden transition-all duration-300 ease-in-out pt-[2px] pb-[2px] px-1",
+                showNameField ? "max-h-20 opacity-100" : "max-h-0 opacity-0"
+              )}
+            >
+              <Label className="sr-only" htmlFor="fullName">
+                Full Name
+              </Label>
+              <Input
+                id="fullName"
+                placeholder="Your full name (optional)"
+                type="text"
+                autoCapitalize="words"
+                autoComplete="name"
+                autoCorrect="off"
+                disabled={isLoading}
+                value={fullName}
+                onChange={(e) => {
+                  setFullName(e.target.value);
                   if (!showPasswordField) {
                     setShowPasswordField(true);
                   }

@@ -11,6 +11,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 export interface SignupWithEmailInput {
   email: string;
   password: string;
+  fullName?: string;
 }
 
 export function Signup() {
