@@ -17,6 +17,12 @@
     },
     "format:check": {
       "dependsOn": ["^format:check"]
+    },
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "test:run": {
+      "dependsOn": ["^test:run"]
     }
   }
 }

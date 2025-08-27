@@ -14,7 +14,9 @@
     "format": "turbo format",
     "format:check": "turbo format:check",
     "lint": "turbo lint",
-    "lint:fix": "turbo lint:fix"
+    "lint:fix": "turbo lint:fix",
+    "test": "turbo test",
+    "test:run": "turbo test:run"
   },
   "packageManager": "yarn@1.22.22",
   "devDependencies": {
