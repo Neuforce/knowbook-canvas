@@ -12,6 +12,5 @@ export function TighterText({
 }) {
   return createElement(as, {
     className: cn("tracking-tighter", className),
-    children,
-  });
+  }, children);
 }
