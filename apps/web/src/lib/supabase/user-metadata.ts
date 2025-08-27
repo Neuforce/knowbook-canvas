@@ -5,7 +5,6 @@
 
 import { createClient } from './server';
 import { createSupabaseClient } from './client';
-import { User } from '@supabase/supabase-js';
 
 interface KnowbookUserMetadata {
   knowbook_api_key?: string;

@@ -184,7 +184,7 @@ export function KnowbookStatus({ showDetails = true, className }: KnowbookStatus
         {!apiKey && (
           <Alert>
             <AlertDescription>
-              If you're missing a Knowbook API key, please contact support or try signing up again.
+              If you&apos;re missing a Knowbook API key, please contact support or try signing up again.
             </AlertDescription>
           </Alert>
         )}
