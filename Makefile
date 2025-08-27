@@ -43,9 +43,13 @@ lint-fix: ## Fix linting issues
 	@echo "Fixing linting issues..."
 	yarn lint:fix
 
-test: ## Run tests
-	@echo "Running tests..."
+test: ## Run tests in watch mode
+	@echo "Running tests in watch mode..."
 	yarn test
+
+test-run: ## Run tests once
+	@echo "Running tests..."
+	yarn test:run
 
 # Git Workflow Commands
 branch: ## Create a new feature branch (usage: make branch name=KB-C-01-feature-name)
