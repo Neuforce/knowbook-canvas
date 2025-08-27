@@ -42,11 +42,10 @@ export async function signup(input: SignupWithEmailInput, baseUrl: string) {
       if (isApiAvailable) {
         console.log('Creating Knowbook organization for user:', input.email);
         
-        // Generate organization name from email domain or use user's name
+        // Generate organization name from user input or email
         const emailDomain = input.email.split('@')[1];
-        const organizationName = input.fullName 
-          ? `${input.fullName}'s Workspace`
-          : `${emailDomain} Workspace`;
+        const organizationName = input.organizationName || 
+          (input.fullName ? input.fullName : input.email.split('@')[0]);
         
         // Create organization with admin user
         const knowbookResult = await createKnowbookOrganization(
@@ -54,7 +53,7 @@ export async function signup(input: SignupWithEmailInput, baseUrl: string) {
           input.fullName || input.email.split('@')[0],
           input.email,
           emailDomain,
-          'free' // Default to free plan
+          input.plan || 'free'
         );
 
         // Store Knowbook API key in user metadata

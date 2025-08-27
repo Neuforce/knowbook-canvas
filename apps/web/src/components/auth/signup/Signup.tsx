@@ -12,6 +12,8 @@ export interface SignupWithEmailInput {
   email: string;
   password: string;
   fullName?: string;
+  organizationName?: string;
+  plan?: string;
 }
 
 export function Signup() {
