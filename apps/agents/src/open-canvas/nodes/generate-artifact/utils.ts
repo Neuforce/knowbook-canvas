@@ -25,19 +25,23 @@ export const createArtifactContent = (
   const artifactType = toolCall?.type;
 
   if (artifactType === "code") {
+    // Ensure code content is not empty
+    const codeContent = toolCall?.artifact?.trim() || "// Start coding here...";
     return {
       index: 1,
       type: "code",
-      title: toolCall?.title,
-      code: toolCall?.artifact,
+      title: toolCall?.title || "Untitled Code",
+      code: codeContent,
       language: toolCall?.language as ProgrammingLanguageOptions,
     };
   }
 
+  // Ensure markdown content is not empty
+  const markdownContent = toolCall?.artifact?.trim() || "Start writing here...";
   return {
     index: 1,
     type: "text",
-    title: toolCall?.title,
-    fullMarkdown: toolCall?.artifact,
+    title: toolCall?.title || "Untitled Document",
+    fullMarkdown: markdownContent,
   };
 };

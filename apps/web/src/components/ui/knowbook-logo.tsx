@@ -39,13 +39,16 @@ export function KnowbookLogo({
   
   return (
     <div className={cn("flex items-center gap-3", className)}>
-      <NextImage
-        src={logoConfig.icon}
-        width={size}
-        height={size}
-        alt="Knowbook Logo"
-        className="rounded-lg"
-      />
+      <div style={{ width: size, height: size }} className="relative">
+        <NextImage
+          src={logoConfig.icon}
+          fill
+          alt="Knowbook Logo"
+          className="rounded-lg object-contain"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
+        />
+      </div>
       {showText && (
         <span 
           className={cn(

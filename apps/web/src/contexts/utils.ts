@@ -81,8 +81,8 @@ export const createNewGeneratedArtifactFromTool = (
     return {
       index: 1,
       type: "text",
-      title: artifactTool.title || "",
-      fullMarkdown: artifactTool.artifact || "",
+      title: artifactTool.title || "Untitled Document",
+      fullMarkdown: artifactTool.artifact?.trim() || "Start writing here...",
     };
   } else {
     if (!artifactTool.language) {
@@ -91,8 +91,8 @@ export const createNewGeneratedArtifactFromTool = (
     return {
       index: 1,
       type: "code",
-      title: artifactTool.title || "",
-      code: artifactTool.artifact || "",
+      title: artifactTool.title || "Untitled Code",
+      code: artifactTool.artifact?.trim() || "// Start coding here...",
       language: artifactTool.language as ProgrammingLanguageOptions,
     };
   }

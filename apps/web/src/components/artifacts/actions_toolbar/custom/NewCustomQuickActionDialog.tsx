@@ -175,12 +175,12 @@ export function NewCustomQuickActionDialog(
       <DialogContent className="max-w-xl p-8 bg-white rounded-lg shadow-xl min-w-[70vw]">
         <DialogHeader>
           <DialogTitle className="text-3xl font-light text-gray-800">
-            <TighterText>
+            <TighterText as="span">
               {props.isEditing ? "Edit" : "Create"} Quick Action
             </TighterText>
           </DialogTitle>
           <DialogDescription className="mt-2 text-md font-light text-gray-600">
-            <TighterText>
+            <TighterText as="span">
               Custom quick actions are a way to create your own actions to take
               against the selected artifact.
             </TighterText>
@@ -225,7 +225,7 @@ export function NewCustomQuickActionDialog(
             <span className="my-1" />
             <div className="flex items-center justify-center w-full h-[350px] gap-2 transition-all duration-300 ease-in-out">
               <div className="w-full h-full flex flex-col gap-1">
-                <TighterText className="text-gray-500 text-sm flex items-center">
+                <TighterText as="span" className="text-gray-500 text-sm flex items-center">
                   Custom instructions
                   <InlineContextTooltip>
                     <p className="text-sm text-gray-600">
@@ -246,7 +246,7 @@ export function NewCustomQuickActionDialog(
 
               {showFullPrompt && (
                 <div className="w-full h-full flex flex-col gap-1">
-                  <TighterText className="text-gray-500 text-sm flex items-center">
+                  <TighterText as="span" className="text-gray-500 text-sm flex items-center">
                     Full prompt
                     <InlineContextTooltip>
                       <p className="text-sm text-gray-600">

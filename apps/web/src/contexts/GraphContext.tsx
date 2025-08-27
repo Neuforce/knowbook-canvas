@@ -1226,6 +1226,27 @@ export function GraphProvider({ children }: { children: ReactNode }) {
                 setArtifact(result);
               }
             }
+
+            // Handle replyToGeneralInput - create a text artifact with the AI's response
+            if (langgraphNode === "replyToGeneralInput") {
+              // Find the AI's response message
+              const aiMessage = messages.find(m => m.id === followupMessageId);
+              if (aiMessage && !artifact) {
+                // Create a text artifact with the AI's response
+                const newArtifact = {
+                  currentIndex: 1,
+                  contents: [{
+                    index: 1,
+                    type: "text" as const,
+                    title: "Conversation",
+                    fullMarkdown: typeof aiMessage.content === 'string' 
+                      ? aiMessage.content 
+                      : "Start writing here...",
+                  }],
+                };
+                setArtifact(newArtifact);
+              }
+            }
           }
         } catch (e: any) {
           console.error(

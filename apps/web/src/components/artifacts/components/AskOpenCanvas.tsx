@@ -8,7 +8,7 @@ import { getArtifactContent } from "@opencanvas/shared/utils/artifacts";
 import { isArtifactCodeContent } from "@opencanvas/shared/utils/artifacts";
 import { useToast } from "@/hooks/use-toast";
 
-interface AskOpenCanvasProps {
+interface AskKnowbookProps {
   isInputVisible: boolean;
   selectionBox: { top: number; left: number };
   setIsInputVisible: (visible: boolean) => void;
@@ -21,7 +21,7 @@ interface AskOpenCanvasProps {
   setInputValue: Dispatch<SetStateAction<string>>;
 }
 
-export const AskOpenCanvas = forwardRef<HTMLDivElement, AskOpenCanvasProps>(
+export const AskKnowbook = forwardRef<HTMLDivElement, AskKnowbookProps>(
   (props, ref) => {
     const { toast } = useToast();
 
@@ -129,4 +129,4 @@ export const AskOpenCanvas = forwardRef<HTMLDivElement, AskOpenCanvasProps>(
   }
 );
 
-AskOpenCanvas.displayName = "AskOpenCanvas";
+AskKnowbook.displayName = "AskKnowbook";

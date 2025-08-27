@@ -81,8 +81,8 @@ export function CanvasComponent() {
       artifactContent = {
         index: 1,
         type: "text",
-        title: `Quick start ${type}`,
-        fullMarkdown: "",
+        title: "New Document",
+        fullMarkdown: "Start writing here...",
       };
     }
 
