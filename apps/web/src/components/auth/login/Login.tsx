@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
-import NextImage from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "../../ui/button";
+import { KnowbookLogo } from "../../ui/knowbook-logo";
 import { UserAuthForm } from "./user-auth-form-login";
 import { login } from "./actions";
 import { createSupabaseClient } from "@/lib/supabase/client";
@@ -67,17 +67,12 @@ export function Login() {
       </Link>
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
         <div className="absolute inset-0 bg-zinc-900" />
-        <div className="relative z-20 flex gap-3 items-center text-lg font-medium">
-          <NextImage
-            src="/knowbook-icon.png"
-            width={36}
-            height={36}
-            alt="Knowbook Logo"
-            className="rounded-lg"
+        <div className="relative z-20">
+          <KnowbookLogo 
+            variant="dark" 
+            size={36}
+            className="text-lg font-medium"
           />
-          <span style={{ fontFamily: 'Urbanist, sans-serif', fontWeight: 'bold' }}>
-            knowbook
-          </span>
         </div>
       </div>
       <div className="lg:p-8">

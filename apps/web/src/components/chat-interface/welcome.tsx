@@ -3,6 +3,7 @@ import { ThreadPrimitive, useThreadRuntime } from "@assistant-ui/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FC, useMemo } from "react";
 import { TighterText } from "../ui/header";
+import { KnowbookLogo } from "../ui/knowbook-logo";
 import { NotebookPen } from "lucide-react";
 import { ProgrammingLanguagesDropdown } from "../ui/programming-lang-dropdown";
 import { Button } from "../ui/button";
@@ -139,13 +140,11 @@ export const ThreadWelcome: FC<ThreadWelcomeProps> = (
       <div className="flex items-center justify-center mt-16 w-full">
         <div className="text-center max-w-3xl w-full">
           <div className="flex flex-col items-center gap-4">
-            <Avatar className="mx-auto">
-              <AvatarImage src="/knowbook-icon.png" alt="Knowbook Logo" />
-              <AvatarFallback>KB</AvatarFallback>
-            </Avatar>
-            <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Urbanist, sans-serif' }}>
-              knowbook
-            </h1>
+            <KnowbookLogo 
+              variant="light" 
+              size={48}
+              className="text-2xl font-bold"
+            />
           </div>
           <TighterText className="mt-6 text-lg font-medium">
             What would you like to write today?

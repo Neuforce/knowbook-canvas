@@ -8,7 +8,7 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { ReflectionsDialog } from "../reflections-dialog/ReflectionsDialog";
 import { useLangSmithLinkToolUI } from "../tool-hooks/LangSmithLinkToolUI";
 import { TooltipIconButton } from "../ui/assistant-ui/tooltip-icon-button";
-import { TighterText } from "../ui/header";
+import { KnowbookLogo } from "../ui/knowbook-logo";
 import { Composer } from "./composer";
 import { AssistantMessage, UserMessage } from "./messages";
 import ModelSelector from "./model-selector";
@@ -97,7 +97,12 @@ export const Thread: FC<ThreadProps> = (props: ThreadProps) => {
           <ThreadHistory
             switchSelectedThreadCallback={switchSelectedThreadCallback}
           />
-          <TighterText className="text-xl" style={{ fontFamily: 'Urbanist, sans-serif', fontWeight: 'bold' }}>knowbook</TighterText>
+          <KnowbookLogo 
+            variant="light" 
+            size={24}
+            showText={true}
+            textClassName="text-xl"
+          />
           {!hasChatStarted && (
             <ModelSelector
               modelName={modelName}
