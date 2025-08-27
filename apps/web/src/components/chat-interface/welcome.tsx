@@ -138,11 +138,16 @@ export const ThreadWelcome: FC<ThreadWelcomeProps> = (
     <ThreadPrimitive.Empty>
       <div className="flex items-center justify-center mt-16 w-full">
         <div className="text-center max-w-3xl w-full">
-          <Avatar className="mx-auto">
-            <AvatarImage src="/lc_logo.jpg" alt="LangChain Logo" />
-            <AvatarFallback>LC</AvatarFallback>
-          </Avatar>
-          <TighterText className="mt-4 text-lg font-medium">
+          <div className="flex flex-col items-center gap-4">
+            <Avatar className="mx-auto">
+              <AvatarImage src="/knowbook-icon.png" alt="Knowbook Logo" />
+              <AvatarFallback>KB</AvatarFallback>
+            </Avatar>
+            <h1 className="text-2xl font-bold text-gray-900" style={{ fontFamily: 'Urbanist, sans-serif' }}>
+              knowbook
+            </h1>
+          </div>
+          <TighterText className="mt-6 text-lg font-medium">
             What would you like to write today?
           </TighterText>
           <div className="mt-8 w-full">

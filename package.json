@@ -1,8 +1,8 @@
 {
-  "name": "open_canvas",
-  "author": "Brace Sproul",
-  "homepage": "https://opencanvas.langchain.com",
-  "repository": "https://github.com/langchain-ai/open-canvas",
+  "name": "knowbook_canvas",
+  "author": "Neuforce",
+  "homepage": "https://knowbook.neuforce.com",
+  "repository": "https://github.com/neuforce/knowbook-canvas",
   "private": true,
   "workspaces": ["apps/*", "packages/*"],
   "scripts": {

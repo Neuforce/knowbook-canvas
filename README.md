@@ -1,10 +1,8 @@
-# Open Canvas
-
-[TRY IT OUT HERE](https://opencanvas.langchain.com/)
+# Knowbook Canvas
 
 ![Screenshot of app](./static/screenshot.png)
 
-Open Canvas is an open source web application for collaborating with agents to better write documents. It is inspired by [OpenAI's "Canvas"](https://openai.com/index/introducing-canvas/), but with a few key differences.
+Knowbook Canvas is an AI-powered knowledge creation and collaboration platform built on top of [Open Canvas](https://github.com/langchain-ai/open-canvas). It integrates with the Knowbook ecosystem to provide seamless knowledge management and document collaboration capabilities.
 
 1. **Open Source**: All the code, from the frontend, to the content generation agent, to the reflection agent is open source and MIT licensed.
 2. **Built in memory**: Open Canvas ships out of the box with a [reflection agent](https://langchain-ai.github.io/langgraphjs/tutorials/reflection/reflection/) which stores style rules and user insights in a [shared memory store](https://langchain-ai.github.io/langgraphjs/concepts/memory/). This allows Open Canvas to remember facts about you across sessions.

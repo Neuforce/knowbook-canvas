@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Urbanist } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
-const inter = Inter({
+const urbanist = Urbanist({
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Open Canvas",
-  description: "Open Canvas Chat UX by LangChain",
+  title: "Knowbook",
+  description: "Knowbook - AI-powered knowledge creation and collaboration",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-screen">
-      <body className={cn("min-h-full", inter.className)}>
+      <body className={cn("min-h-full", urbanist.className)}>
         <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
